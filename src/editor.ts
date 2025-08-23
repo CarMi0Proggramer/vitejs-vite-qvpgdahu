@@ -54,22 +54,17 @@ export class Editor {
   image.src = url;
   await new Promise((resolve) => (image.onload = resolve));
 
-  // Calcular la escala basándose en el ancho disponible
-  const scaleX = this.stage.width() / image.naturalWidth;
+  const scale = this.stage.width() / image.naturalWidth;
+  const newImageHeight = image.naturalHeight * scale;
   
-  // Calcular la altura escalada manteniendo la proporción
-  const scaledHeight = image.naturalHeight * scaleX;
-  
-  // Si queremos que se ajuste también al height del stage:
-  const scaleY = Math.min(scaleX, this.stage.height() / image.naturalHeight);
-  const finalScaleX = Math.min(scaleX, this.stage.width() / image.naturalWidth);
+  this.stage.height(newImageHeight);
 
   this.backgroundImage = new Konva.Image({
     image,
     x: 0,
     y: 0,
-    scaleX: finalScaleX,
-    scaleY: scaleY,
+    scaleX: scale,
+    scaleY: scale,
     draggable: false,
     listening: false,
   });
