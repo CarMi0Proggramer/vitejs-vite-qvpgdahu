@@ -56,15 +56,11 @@ export class Editor {
 
     this.backgroundImage = new Konva.Image({
       image,
-      width: this.stage.width(),
-      height: this.stage.width() / (image.width / image.height),
       x: 0,
       y: 0,
       draggable: false,
       listening: false,
     });
-
-    this.stage.height(this.backgroundImage.height());
     this.backgroundLayer.add(this.backgroundImage);
     this.backgroundImage.moveToBottom();
 
