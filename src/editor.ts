@@ -55,12 +55,15 @@ export class Editor {
     await new Promise((resolve) => (image.onload = resolve));
 
 const scaleX = this.stage.width() / image.naturalWidth;
+   const desiredHeight =this.stage.width() / (image.width / image.height);
+const scaleY = this.stage.height() / desiredHeight;
 
     this.backgroundImage = new Konva.Image({
       image,
       x: 0,
       y: 0,
-      scaleX: scaleX,
+      scaleX,
+scaleY,
       draggable: false,
       listening: false,
     });
