@@ -48,33 +48,40 @@ export class Editor {
   }
 
   async setBackgroundImage(url: string): Promise<void> {
-    const oldImage = this.backgroundImage;
+  const oldImage = this.backgroundImage;
 
-    const image = new Image();
-    image.src = url;
-    await new Promise((resolve) => (image.onload = resolve));
+  const image = new Image();
+  image.src = url;
+  await new Promise((resolve) => (image.onload = resolve));
 
-const scaleX = this.stage.width() / image.naturalWidth;
-   const desiredHeight =this.stage.width() / (image.width / image.height);
-const scaleY = this.stage.height() / desiredHeight;
+  // Calcular la escala basándose en el ancho disponible
+  const scaleX = this.stage.width() / image.naturalWidth;
+  
+  // Calcular la altura escalada manteniendo la proporción
+  const scaledHeight = image.naturalHeight * scaleX;
+  
+  // Si queremos que se ajuste también al height del stage:
+  const scaleY = Math.min(scaleX, this.stage.height() / image.naturalHeight);
+  const finalScaleX = Math.min(scaleX, this.stage.width() / image.naturalWidth);
 
-    this.backgroundImage = new Konva.Image({
-      image,
-      x: 0,
-      y: 0,
-      scaleX,
-scaleY,
-      draggable: false,
-      listening: false,
-    });
+  this.backgroundImage = new Konva.Image({
+    image,
+    x: 0,
+    y: 0,
+    scaleX: finalScaleX,
+    scaleY: scaleY,
+    draggable: false,
+    listening: false,
+  });
 
-this.backgroundImage.cache({ pixelRatio: 1 }); this.backgroundLayer.add(this.backgroundImage);
-    this.backgroundImage.moveToBottom();
+  this.backgroundImage.cache({ pixelRatio: 1 });
+  this.backgroundLayer.add(this.backgroundImage);
+  this.backgroundImage.moveToBottom();
 
-    if (oldImage) {
-      oldImage.destroy();
-    }
+  if (oldImage) {
+    oldImage.destroy();
   }
+}
 
   setZoom(zoom: number) {
     this.zoomControl.setZoom(zoom);
