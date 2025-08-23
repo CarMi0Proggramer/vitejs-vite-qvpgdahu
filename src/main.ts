@@ -13,7 +13,7 @@ fetch("/image.jpg")
 })
 
 document.getElementById("zoomInput")!
-.addEventListener("change",({target})=> {
+.addEventListener("input",({target})=> {
 const zoom = parseInt((target as HTMLInputElement).value)
 
   editor.setZoom(zoom);
