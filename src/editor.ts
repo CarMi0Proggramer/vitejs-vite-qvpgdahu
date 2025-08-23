@@ -75,6 +75,8 @@ const scaleX = this.stage.width() / image.naturalWidth;
 
  this.backgroundLayer.add(this.backgroundImage);
     this.backgroundImage.moveToBottom();
+this
+.backgroundImage.cache();
 
     if (oldImage) {
       oldImage.destroy();
