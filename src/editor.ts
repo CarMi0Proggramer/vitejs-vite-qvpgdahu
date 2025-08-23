@@ -56,27 +56,19 @@ export class Editor {
 
 const scaleX = this.stage.width() / image.naturalWidth;
     const scaleY = this.stage.height() / image.naturalHeight;
-    
-    // Usar la escala que mejor se ajuste (cover) o mantener aspecto (contain)
-    // Para cover (llenar todo el stage):
-    const scale = Math.max(scaleX, scaleY);
-    // Para contain (mantener toda la imagen visible):
-    // const scale = Math.min(scaleX, scaleY);
 
     this.backgroundImage = new Konva.Image({
       image,
       x: 0,
       y: 0,
-      scaleX: scale,
-      scaleY: scale,
+      scaleX: scaleX,
+      scaleY: scaleY,
       draggable: false,
       listening: false,
     });
 
  this.backgroundLayer.add(this.backgroundImage);
     this.backgroundImage.moveToBottom();
-this
-.backgroundImage.cache();
 
     if (oldImage) {
       oldImage.destroy();
