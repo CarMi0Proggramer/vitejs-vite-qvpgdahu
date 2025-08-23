@@ -61,6 +61,9 @@ export class Editor {
       draggable: false,
       listening: false,
     });
+
+const scale = this.stage.width() / this.backgroundImage.width();
+this.backgroundImage.scale(scale);
     this.backgroundLayer.add(this.backgroundImage);
     this.backgroundImage.moveToBottom();
 
