@@ -27,12 +27,9 @@ export class Editor {
     this.stage.add(this.backgroundLayer);
     this.backgroundLayer.moveToBottom();
 
-    this.registerControls();
-    this.initEvents();
-  }
-
-  private registerControls() {
     this.zoomControl = new ZoomControl(this.stage);
+
+    this.initEvents();
   }
 
   private initEvents() {
