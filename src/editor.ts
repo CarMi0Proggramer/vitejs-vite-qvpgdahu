@@ -67,7 +67,7 @@ const scaleX = this.stage.width() / image.naturalWidth;
       listening: false,
     });
 
-this.backgroundImage.cache(); this.backgroundLayer.add(this.backgroundImage);
+this.backgroundImage.cache({ pixelRatio: 1 }); this.backgroundLayer.add(this.backgroundImage);
     this.backgroundImage.moveToBottom();
 
     if (oldImage) {
