@@ -54,17 +54,26 @@ export class Editor {
     image.src = url;
     await new Promise((resolve) => (image.onload = resolve));
 
+const scaleX = this.stage.width() / image.naturalWidth;
+    const scaleY = this.stage.height() / image.naturalHeight;
+    
+    // Usar la escala que mejor se ajuste (cover) o mantener aspecto (contain)
+    // Para cover (llenar todo el stage):
+    const scale = Math.max(scaleX, scaleY);
+    // Para contain (mantener toda la imagen visible):
+    // const scale = Math.min(scaleX, scaleY);
+
     this.backgroundImage = new Konva.Image({
       image,
       x: 0,
       y: 0,
+      scaleX: scale,
+      scaleY: scale,
       draggable: false,
       listening: false,
     });
 
-const scale = this.stage.width() / this.backgroundImage.width();
-this.backgroundImage.scale(scale);
-    this.backgroundLayer.add(this.backgroundImage);
+ this.backgroundLayer.add(this.backgroundImage);
     this.backgroundImage.moveToBottom();
 
     if (oldImage) {
