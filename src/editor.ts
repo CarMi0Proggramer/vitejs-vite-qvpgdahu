@@ -69,7 +69,7 @@ export class Editor {
     listening: false,
   });
 
-  this.backgroundImage.cache();
+  this.backgroundImage.cache({pixelRatio:0.5});
   this.backgroundLayer.add(this.backgroundImage);
   this.backgroundImage.moveToBottom();
 
