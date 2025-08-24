@@ -68,8 +68,6 @@ export class Editor {
     draggable: false,
     listening: false,
   });
-
-  this.backgroundImage.cache();
   this.backgroundLayer.add(this.backgroundImage);
   this.backgroundImage.moveToBottom();
 
